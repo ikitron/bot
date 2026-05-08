@@ -1,3 +1,4 @@
 discord.py
 cryptography
 psycopg2
+flask
