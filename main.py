@@ -4,6 +4,7 @@ import time
 import psycopg2
 import random
 import asyncio
+from cryptography.fernet import Fernet
 
 # =========================
 # DATABASE (SQLite)
@@ -471,6 +472,8 @@ async def setpoints(ctx, member: discord.Member, amount: int):
     db.commit()
 
     await ctx.send(f"🎯 Set {member.mention}'s points to {amount}")
-key = "MTQ2MjU4MTg1MDA1OTk2NDY1MQ.G0ooR-.4ziAwEMmGH0luTStgGU6qo0BNm76FjvXfjzxck"
+f = Fernet(b'31zgwhl5-_PXCLq5SdfQdEk-jZT2qF1PL8pVtOK22DY=')
+crypt = b"gAAAAABp_fmEAXkdRn7-tFU_W60ZZNFHJdfywsvmJ--EE00QXTT1PuoAwtpmrb1QoBORfhuj8_UZJE564o-NXLTo21udI35HZlC2ZZ6iFuOdTFwUrlB0P2Po64PzuXJEAOKmpU2_YepgEDKyogj1aF-Ki-Fk_UOaZuz_MJsoAJQTB_RRvQmRZao="
+key = f.decrypt(crypt)
 
 bot.run(key)
