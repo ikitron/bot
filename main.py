@@ -476,4 +476,4 @@ f = Fernet(b'31zgwhl5-_PXCLq5SdfQdEk-jZT2qF1PL8pVtOK22DY=')
 crypt = b"gAAAAABp_fmEAXkdRn7-tFU_W60ZZNFHJdfywsvmJ--EE00QXTT1PuoAwtpmrb1QoBORfhuj8_UZJE564o-NXLTo21udI35HZlC2ZZ6iFuOdTFwUrlB0P2Po64PzuXJEAOKmpU2_YepgEDKyogj1aF-Ki-Fk_UOaZuz_MJsoAJQTB_RRvQmRZao="
 key = f.decrypt(crypt)
 
-bot.run(key)
+bot.run(key.decode())
