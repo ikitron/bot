@@ -5,7 +5,8 @@ import psycopg2
 import random
 import asyncio
 from cryptography.fernet import Fernet
-
+from threading import Thread
+from flask import Flask
 # =========================
 # DATABASE (SQLite)
 # =========================
@@ -14,7 +15,7 @@ XP_MIN = 5
 XP_MAX = 15
 XP_COOLDOWN = 10
 POINTS_PER_LEVEL = 50
-
+app = Flask(__name__)
 # =========================
 # DISCORD SETUP
 # =========================
@@ -475,5 +476,7 @@ async def setpoints(ctx, member: discord.Member, amount: int):
 f = Fernet(b'31zgwhl5-_PXCLq5SdfQdEk-jZT2qF1PL8pVtOK22DY=')
 crypt = b"gAAAAABp_fmEAXkdRn7-tFU_W60ZZNFHJdfywsvmJ--EE00QXTT1PuoAwtpmrb1QoBORfhuj8_UZJE564o-NXLTo21udI35HZlC2ZZ6iFuOdTFwUrlB0P2Po64PzuXJEAOKmpU2_YepgEDKyogj1aF-Ki-Fk_UOaZuz_MJsoAJQTB_RRvQmRZao="
 key = f.decrypt(crypt)
-
+def run():
+    app.run(port=80, host='0.0.0.0')
+Thread(target=run, daemon=True).start()
 bot.run(key.decode())
